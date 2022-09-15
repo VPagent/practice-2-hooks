@@ -1,7 +1,20 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useEffect } from 'react';
 
 export function ModalHero({ handleClose, show, hero }) {
+  useEffect(() => {
+    window.addEventListener('keydown', handleEscape);
+
+    return () => {window.removeEventListener('keydowm', handleEscape)}
+    // eslint-disable-next-line
+  }, []);
+
+  const handleEscape = event => {
+    if (event.key === 'Escape') {
+      handleClose();
+    }
+  };
   if (hero) {
     const { name, gender, birth_year, hair_color, skin_color } = hero;
     return (
